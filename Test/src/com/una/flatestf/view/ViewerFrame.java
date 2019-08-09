@@ -6,7 +6,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.una.flatestf.action.CopyAction;
-import com.una.flatestf.action.FilterActionFrame;
-import com.una.flatestf.controller.Inte_Copy;
-import com.una.flatestf.controller.Inte_Filter;
-import com.una.flatestf.impl.Inte_Copy_impl;
-import com.una.flatestf.impl.Inte_Filter_Imp;
+import com.una.flatestf.controller.Inte_Controller;
+import com.una.flatestf.impl.Inte_Controller_Impl;
 
 public class ViewerFrame extends JFrame {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JFileChooser fileChooser = new JFileChooser();;
 	static ViewerFrame m_view;
@@ -90,8 +81,10 @@ public class ViewerFrame extends JFrame {
 			}
 		});
 		srcJtf = new JTextField(15);
+		srcJtf.setEditable(false);
 		destJtf = new JTextField(15);
-
+		destJtf.setEditable(false);
+		
 		JLabel srclabel = new JLabel("源文件目录");
 		JLabel destlabel = new JLabel("目标文件目录");
 		srcJp.add(srclabel);
@@ -101,40 +94,16 @@ public class ViewerFrame extends JFrame {
 		destJp.add(destJtf);
 		destJp.add(destButton);
 
-		JButton filterButton = new JButton("过滤");
-		filterButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new FilterActionFrame(m_srcPath, m_filters);
-			}
-		});
 		JButton copyButton = new JButton("复制");
 		copyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Inte_Filter rd = new Inte_Filter_Imp(m_destPath);
-				Inte_Copy ic = new Inte_Copy_impl();
-				CopyAction copyAction=new CopyAction(rd,ic,m_srcPath,m_destPath,m_filters);
-				copyAction.copyAction();
+				Inte_Controller controller=new Inte_Controller_Impl(m_srcPath,m_destPath);
+				controller.Start();
 			}
 		});
 		
-		JButton logButton = new JButton("检查日志");
-		logButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String path=m_destPath+"\\log.txt";
-				try {
-					Runtime.getRuntime().exec("cmd /c "+path);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		});
-		buttonJp.add(filterButton);
 		buttonJp.add(copyButton);
-		buttonJp.add(logButton);
 
 		this.add(srcJp);
 		this.add(destJp);
@@ -146,12 +115,5 @@ public class ViewerFrame extends JFrame {
 
 	public static void main(String[] args) {
 		m_view = new ViewerFrame();
-	}
-
-	public static List<String> setFilter(List<String> filterList) {
-		m_filters=new ArrayList<String>();
-		m_filters = filterList;
-//		System.out.println(m_filters);
-		return m_filters;
 	}
 }
