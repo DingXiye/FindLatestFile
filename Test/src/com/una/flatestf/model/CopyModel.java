@@ -14,7 +14,12 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 
 import com.una.flatestf.util.Close;
-
+/**
+ * é”™è¯¯æç¤ºä¿¡æ¯ä½¿ç”¨ä¸€ä¸ªå®ä½“ç±»
+ * å¯ä»¥é€šè¿‡è¿”å›å€¼è¿”å›é”™è¯¯ä¿¡æ¯
+ * @author Lenovo
+ *
+ */
 public class CopyModel {
 	private List<String> m_copyPathList = null;
 	private String m_destPath = null;
@@ -26,7 +31,7 @@ public class CopyModel {
 	}
 
 	/**
-	 * ¿½±´ËùÓĞĞèÒªµÄ°æ±¾
+	 *æ‹·è´æ“ä½œ
 	 */
 	public void Copy() {
 		try {
@@ -40,19 +45,19 @@ public class CopyModel {
 				}
 				copy(src, dest);
 			}
-			JOptionPane.showMessageDialog(null, "¿½±´Íê³É", "ÌáÊ¾ĞÅÏ¢", JOptionPane.PLAIN_MESSAGE);
+			JOptionPane.showMessageDialog(null, "æ‹·è´å®Œæˆ", "æç¤ºä¿¡æ¯", JOptionPane.PLAIN_MESSAGE);
 		} catch (Exception e) {
-			logger.error("ÎÄ¼şÂ·¾¶ÓĞÎÊÌâ");
+			logger.error("æ‹·è´åœ°å€é”™è¯¯");
 		}
 	}
 
 	/**
-	 * ¿½±´Õâ¸öÄ¿Â¼
 	 * 
-	 * @param src  Ô´ÎÄ¼ş
-	 * @param dest Ä¿±êÎÄ¼ş
+	 * æ‹·è´æ–‡ä»¶å¤¹
+	 * @param src  æºæ–‡ä»¶åœ°å€
+	 * @param dest  ç›®æ ‡æ–‡ä»¶åœ°å€
 	 */
-	private static void copy(File src, File dest) {
+	private void copy(File src, File dest) {
 		if (src.isFile()) {
 			copyFile(src, dest);
 		} else if (src.isDirectory()) {
@@ -64,12 +69,12 @@ public class CopyModel {
 	}
 
 	/**
-	 * ¿½±´ÎÄ¼ş
+	 * æ‹·è´æ–‡ä»¶
 	 * 
-	 * @param src  Ô´ÎÄ¼ş
-	 * @param dest Ä¿±êÎÄ¼ş
+	 * @param src  æºæ–‡ä»¶åœ°å€
+	 * @param dest ç›®æ ‡æ–‡ä»¶åœ°å€
 	 */
-	public static void copyFile(File src, File dest) {
+	public void copyFile(File src, File dest) {
 		OutputStream os = null;
 		InputStream is = null;
 		try {

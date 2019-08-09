@@ -9,16 +9,14 @@ public class LogModel {
 	private int m_fileLevel=0;
 
 	/**
-	 * Éú³ÉÊä³ö¸ñÊ½
+	 *åˆ›å»ºæ—¥å¿—ä¿¡æ¯æ ¼å¼
 	 * 
-	 * @param name  Êä³öµÄÎÄ¼şÃû»òÄ¿Â¼Ãû
-	 * @param level Êä³öµÄÎÄ¼şÃû»òÕßÄ¿Â¼ÃûËùÔÚµÄ²ã´Î
-	 * @return Êä³öµÄ×Ö·û´®
+	 * @param name  æ–‡ä»¶å
+	 * @param level å±‚çº§
+	 * @return æ–‡ä»¶å
 	 */
 	public String createPrintStr(String name, int level) {
-		// Êä³öµÄÇ°×º
 		String printStr = "";
-		// °´²ã´Î½øĞĞËõ½ø
 		for (int i = 0; i < level; i++) {
 			printStr = printStr + " ";
 		}
@@ -27,22 +25,18 @@ public class LogModel {
 	}
 	
 	/**
-	 * µİ¹é±éÀúÎÄ¼ş¼Ğ
-	 * Êä³ö¸ø¶¨Ä¿Â¼ÏÂµÄÎÄ¼ş£¬°üÀ¨×ÓÄ¿Â¼ÖĞµÄÎÄ¼ş
+	 *éå†æ–‡ä»¶å¤¹ï¼Œè¾“å‡ºæ–‡ä»¶ä¿¡æ¯
 	 * 
-	 * @param dirPath ¸ø¶¨µÄÄ¿Â¼
+	 * @param path è¾“å‡ºç›®å½•åœ°å€
 	 */
 	public void Traserve(String path) {
 		File file = new File(path);
-		// È¡µÃ´ú±íÄ¿Â¼ÖĞËùÓĞÎÄ¼şµÄFile¶ÔÏóÊı×é
 		File[] list = file.listFiles();
-		// ±éÀúfileÊı×é
 		for (int i = 0; i < list.length; i++) {
 			if (list[i].isDirectory()) {
 				logger.info(createPrintStr(list[i].getName(), m_fileLevel));
 //				System.out.println(createPrintStr(list[i].getName(), m_fileLevel));
 				m_fileLevel++;
-				// µİ¹é×ÓÄ¿Â¼
 				Traserve(list[i].getPath());
 				m_fileLevel--;
 			} else {

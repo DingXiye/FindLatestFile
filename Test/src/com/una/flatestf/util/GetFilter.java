@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import com.una.flatestf.model.CompareModel;
 /**
- * ¹¤¾ßÀà
- * ´ÓÅäÖÃÎÄ¼ş¶ÁÈ¡¹ıÂËĞÅÏ¢ Ê¹ÓÃdom·½·¨
+ * ä»xmlæ–‡ä»¶ä¸­è·å–è¿‡æ»¤ä¿¡æ¯
  * 
  * @author Lenovo
  *
  */
 @SuppressWarnings("unchecked")
 public class GetFilter {
+	private static Logger logger = Logger.getLogger(GetFilter.class);
 	private String m_srcPath=null;
 	private List<String> m_filterList=null;
 
@@ -46,6 +49,7 @@ public class GetFilter {
 			}
 		} catch (DocumentException e) {
 			e.printStackTrace();
+			logger.error("è¯»å–è¿‡æ»¤é…ç½®é”™è¯¯");
 		}
 
 		return m_filterList;

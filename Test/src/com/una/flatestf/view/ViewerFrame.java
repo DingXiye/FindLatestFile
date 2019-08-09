@@ -27,11 +27,11 @@ public class ViewerFrame extends JFrame {
 	private JTextField destJtf;
 	private static String m_srcPath;
 	private static String m_destPath;
-	static List<String> m_filters = new ArrayList<String>();//¹ıÂËÌõ¼ş
+	static List<String> m_filters = new ArrayList<String>();
 
 	public ViewerFrame() {
 		this.setPreferredSize(new Dimension(480, 330));
-		this.setTitle("×îĞÂÎÄ¼ş²éÕÒ");
+		this.setTitle("å¯»æ‰¾æœ€æ–°ç‰ˆæœ¬");
 		this.setLocation(417, 177);
 		this.setLayout(new GridLayout(4, 1, 20, 20));
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -49,32 +49,30 @@ public class ViewerFrame extends JFrame {
 		buttonJp.setLayout(new FlowLayout());
 		msgJp.setLayout(new GridLayout());
 
-		JButton srcButton = new JButton("ä¯ÀÀ");
+		JButton srcButton = new JButton("æµè§ˆ");
 		srcButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				fileChooser.setDialogTitle("Ñ¡ÔñÔ´ÎÄ¼ş¼Ğ");
+				fileChooser.setDialogTitle("é€‰æ‹©æºç›®å½•");
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				int i = fileChooser.showOpenDialog(getContentPane());// ÏÔÊ¾ÎÄ¼şÑ¡Ôñ¶Ô»°¿ò
-				// ÅĞ¶ÏÓÃ»§µ¥»÷µÄÊÇ·ñÎª¡°´ò¿ª¡±°´Å¥
+				int i = fileChooser.showOpenDialog(getContentPane());
 				if (i == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fileChooser.getSelectedFile();// »ñµÃÑ¡ÖĞµÄÎÄ¼ş¶ÔÏó
-					srcJtf.setText(selectedFile.getPath());// ÏÔÊ¾Ñ¡ÖĞÎÄ¼şµÄÃû³Æ
+					File selectedFile = fileChooser.getSelectedFile();
+					srcJtf.setText(selectedFile.getPath());
 					m_srcPath = selectedFile.getPath();
 				}
 
 			}
 		});
 
-		JButton destButton = new JButton("ä¯ÀÀ");
+		JButton destButton = new JButton("æµè§ˆ");
 		destButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				fileChooser.setDialogTitle("Ñ¡ÔñÄ¿±êÎÄ¼ş¼Ğ");
+				fileChooser.setDialogTitle("é€‰æ‹©ç›®æ ‡ç›®å½•");
 				fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-				int i = fileChooser.showOpenDialog(getContentPane());// ÏÔÊ¾ÎÄ¼şÑ¡Ôñ¶Ô»°¿ò
-				// ÅĞ¶ÏÓÃ»§µ¥»÷µÄÊÇ·ñÎª¡°´ò¿ª¡±°´Å¥
+				int i = fileChooser.showOpenDialog(getContentPane());
 				if (i == JFileChooser.APPROVE_OPTION) {
-					File selectedFile = fileChooser.getSelectedFile();// »ñµÃÑ¡ÖĞµÄÎÄ¼ş¶ÔÏó
-					destJtf.setText(selectedFile.getPath());// ÏÔÊ¾Ñ¡ÖĞÎÄ¼şµÄÃû³Æ
+					File selectedFile = fileChooser.getSelectedFile();
+					destJtf.setText(selectedFile.getPath());
 					m_destPath = selectedFile.getPath();
 				}
 
@@ -85,8 +83,8 @@ public class ViewerFrame extends JFrame {
 		destJtf = new JTextField(15);
 		destJtf.setEditable(false);
 		
-		JLabel srclabel = new JLabel("Ô´ÎÄ¼şÄ¿Â¼");
-		JLabel destlabel = new JLabel("Ä¿±êÎÄ¼şÄ¿Â¼");
+		JLabel srclabel = new JLabel("æºç›®å½•");
+		JLabel destlabel = new JLabel("ç›®æ ‡ç›®å½•");
 		srcJp.add(srclabel);
 		srcJp.add(srcJtf);
 		srcJp.add(srcButton);
@@ -94,7 +92,7 @@ public class ViewerFrame extends JFrame {
 		destJp.add(destJtf);
 		destJp.add(destButton);
 
-		JButton copyButton = new JButton("¸´ÖÆ");
+		JButton copyButton = new JButton("å¤åˆ¶");
 		copyButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {

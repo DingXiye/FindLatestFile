@@ -10,7 +10,6 @@ import com.una.flatestf.controller.Inte_Controller;
 import com.una.flatestf.model.CompareModel;
 import com.una.flatestf.model.CopyModel;
 import com.una.flatestf.model.FilterModel;
-import com.una.flatestf.model.LogModel;
 
 public class Inte_Controller_Impl implements Inte_Controller{
 	private static Logger logger = Logger.getLogger(Inte_Controller_Impl.class);
@@ -24,23 +23,23 @@ public class Inte_Controller_Impl implements Inte_Controller{
 	}
 	
 	/**
-	 * ¿ªÊ¼ÏîÄ¿
+	 * å¼€å§‹å‡½æ•°
 	 */
 	@Override
 	public void Start() {
-		FilterModel filterModel=new FilterModel();//¹ıÂË
-		if(m_srcPath==null||m_destPath==null) {
-			JOptionPane.showMessageDialog(null, "Î´ÊäÈëÕıÈ·Â·¾¶", "¾¯¸æĞÅÏ¢", JOptionPane.ERROR_MESSAGE);
-			logger.error("Â·¾¶´íÎó");
+		FilterModel filterModel=new FilterModel();
+		if(m_srcPath==null||m_destPath==null) { 
+			logger.error("è·¯å¾„å‡ºé”™");
 			return ;
 		}
 		m_filterList=filterModel.Filter(m_srcPath);
-		CompareModel compareModel=new CompareModel(m_filterList);//±È½Ï
+		CompareModel compareModel=new CompareModel(m_filterList);
 		m_copyPathlist=compareModel.compare();
 		if(m_copyPathlist==null) {
+			logger.error("æ‹·è´è·¯å¾„ä¸ºç©º");
 			return ;
 		}
-		CopyModel copyModel=new CopyModel(m_copyPathlist,m_destPath);//¿½±´
+		CopyModel copyModel=new CopyModel(m_copyPathlist,m_destPath);
 		copyModel.Copy();
 	}
 }

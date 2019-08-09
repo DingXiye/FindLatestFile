@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
 
 /**
- * ¸´ÖÆ°´Å¥¶ÔÓ¦²Ù×÷
+ * æ¯”è¾ƒè·å–æœ€æ–°ç‰ˆæœ¬
  * 
  * @author Lenovo
  *
@@ -30,30 +30,29 @@ public class CompareModel {
 	}
 
 	/**
-	 * ¸ù¾İÎÄ¼şÃûÇ°8Î»±È½ÏÊ±¼ä,»ñµÃ×îĞÂ°æ±¾Â·¾¶
+	 * é€šè¿‡æ¯”è¾ƒæ–‡ä»¶åå‰8ä½å¾—åˆ°æœ€æ–°ç‰ˆæœ¬
 	 */
 	public List<String> compare() {
 		Map<Integer, String> map = null;
 		int[] arr = new int[1000];
 		try {
-			for (String path : m_filtersPathList) {// ÏîÄ¿Â·¾¶
+			for (String path : m_filtersPathList) {
 				File file = new File(path);
 				File[] files = file.listFiles();
 				for (int i = 0; i < files.length; i++) {
 					String[] paths = files[i].getPath().split("\\\\");
-
-					int data = Integer.parseInt(paths[paths.length - 1].substring(0, 8));// °²×°Ê±¼ä´¦Àí
+					int data = Integer.parseInt(paths[paths.length - 1].substring(0, 8));//æ¯”è¾ƒ
+//					if()
 					map = new HashMap<Integer, String>();
 					map.put(data, files[i].getPath());
 					arr[i] = data;
 				}
 				Arrays.sort(arr);
-				String copysrcpath = map.get(arr[arr.length - 1]);// µÃµ½¸ÃÏîÄ¿µÄ×îĞÂ°æ±¾Â·¾¶
+				String copysrcpath = map.get(arr[arr.length - 1]);//è¦æ‹·è´çš„åœ°å€
 				m_copyPathList.add(copysrcpath);
 			}
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ËùÑ¡ÎÄ¼şÃüÃû²»¹æ·¶", "ÌáÊ¾ĞÅÏ¢", JOptionPane.PLAIN_MESSAGE);
-			logger.error("ÏîÄ¿°æ±¾¸ñÊ½²»ÕıÈ·");
+			logger.error("ç‰ˆæœ¬æ–‡ä»¶å‘½åä¸è§„èŒƒï¼Œæ— æ³•æ‰¾åˆ°æœ€æ–°ç‰ˆæœ¬");
 			return null;
 		}
 		return m_copyPathList;

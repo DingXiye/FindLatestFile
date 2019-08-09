@@ -10,17 +10,17 @@ public class FilterModel {
 	private static Logger logger = Logger.getLogger(CompareModel.class);
 	private List<String> m_pathList = null;
 	private List<String> m_filterStr = null;
-	private String xmlPath = "ÅäÖÃÎÄ¼ş/filter.xml";
+	private String xmlPath = "é…ç½®æ–‡ä»¶/filter.xml";
 
 	/**
-	 * ¹ıÂËÄ£¿éÏÂ²»ĞèÒªµÄÏîÄ¿
+	 *è¿‡æ»¤ä¸éœ€è¦çš„æ–‡ä»¶å¤¹
 	 * 
-	 * @param srcPath ÎÄ¼şÂ·¾¶
-	 * @return pathList ¹ıÂËÖ®ºóÊ£ÏÂµÄÏîÄ¿Â·¾¶
+	 * @param srcPath æºç›®å½•åœ°å€
+	 * @return pathList è¿‡æ»¤ä¹‹åçš„åœ°å€é›†åˆ
 	 */
 	public List<String> Filter(String srcPath) {
 		if (xmlPath == null) {
-			logger.error("ÅäÖÃÎÄ¼şÎª¿Õ");
+			logger.error("é…ç½®æ–‡ä»¶æœªæ‰¾åˆ°");
 			return null;
 		} else {
 			m_filterStr = new GetFilter(xmlPath).getFilter();
