@@ -2,14 +2,13 @@ package com.una.flatestf.impl;
 
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Logger;
 
 import com.una.flatestf.controller.Inte_Controller;
 import com.una.flatestf.model.CompareModel;
 import com.una.flatestf.model.CopyModel;
 import com.una.flatestf.model.FilterModel;
+import com.una.flatestf.model.MsgModel;
 
 public class Inte_Controller_Impl implements Inte_Controller{
 	private static Logger logger = Logger.getLogger(Inte_Controller_Impl.class);
@@ -26,20 +25,33 @@ public class Inte_Controller_Impl implements Inte_Controller{
 	 * 开始函数
 	 */
 	@Override
-	public void Start() {
-		FilterModel filterModel=new FilterModel();
+	public MsgModel Start() {
+		MsgModel msgModel=new MsgModel();
 		if(m_srcPath==null||m_destPath==null) { 
 			logger.error("路径出错");
-			return ;
+			msgModel.setId(100);
+			msgModel.setMsg("路径出错");
+			return msgModel;
 		}
-		m_filterList=filterModel.Filter(m_srcPath);
+		FilterModel filterModel=new FilterModel();
+		msgModel=filterModel.Filter(m_srcPath);
+		if(msgModel.getId()==101){
+			return msgModel;
+		}
+		
+		m_filterList=msgModel.getList();
 		CompareModel compareModel=new CompareModel(m_filterList);
-		m_copyPathlist=compareModel.compare();
-		if(m_copyPathlist==null) {
-			logger.error("拷贝路径为空");
-			return ;
+		msgModel=compareModel.compare();
+		if(msgModel.getId()==102) {
+			return msgModel;
 		}
+		
+		m_copyPathlist=msgModel.getList();
 		CopyModel copyModel=new CopyModel(m_copyPathlist,m_destPath);
-		copyModel.Copy();
+		msgModel=copyModel.Copy();
+		if(msgModel.getId()==105){
+			return msgModel;
+		}
+		return msgModel;
 	}
 }

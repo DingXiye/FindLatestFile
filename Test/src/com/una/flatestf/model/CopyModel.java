@@ -9,8 +9,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Logger;
 
 import com.una.flatestf.util.Close;
@@ -33,7 +31,8 @@ public class CopyModel {
 	/**
 	 *拷贝操作
 	 */
-	public void Copy() {
+	public MsgModel Copy() {
+		MsgModel msgModel=new MsgModel();
 		try {
 			for (String copypath : m_copyPathList) {
 				LogModel logModel=new LogModel();
@@ -45,9 +44,14 @@ public class CopyModel {
 				}
 				copy(src, dest);
 			}
-			JOptionPane.showMessageDialog(null, "拷贝完成", "提示信息", JOptionPane.PLAIN_MESSAGE);
+			msgModel.setId(104);
+			msgModel.setMsg("拷贝完成");
+			return msgModel;
 		} catch (Exception e) {
 			logger.error("拷贝地址错误");
+			msgModel.setId(105);
+			msgModel.setMsg("拷贝目标地址出错");
+			return msgModel;
 		}
 	}
 

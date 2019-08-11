@@ -18,10 +18,13 @@ public class FilterModel {
 	 * @param srcPath 源目录地址
 	 * @return pathList 过滤之后的地址集合
 	 */
-	public List<String> Filter(String srcPath) {
+	public MsgModel Filter(String srcPath) {
+		MsgModel msgModel=new MsgModel();
 		if (xmlPath == null) {
 			logger.error("配置文件未找到");
-			return null;
+			msgModel.setId(101);
+			msgModel.setMsg("配置文件未找到");
+			return msgModel;
 		} else {
 			m_filterStr = new GetFilter(xmlPath).getFilter();
 			m_pathList = new ArrayList<String>();
@@ -32,7 +35,10 @@ public class FilterModel {
 					m_pathList.add(filelist[i].getPath());
 				}
 			}
-			return m_pathList;
+			msgModel.setId(106);
+			msgModel.setList(m_pathList);
+			msgModel.setMsg("获取过滤成功");
+			return msgModel;
 		}
 	}
 	

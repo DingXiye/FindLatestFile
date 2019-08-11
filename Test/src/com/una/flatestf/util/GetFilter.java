@@ -11,7 +11,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import com.una.flatestf.model.CompareModel;
 /**
  * 从xml文件中获取过滤信息
  * 

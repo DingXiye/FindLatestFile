@@ -7,8 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -32,7 +30,8 @@ public class CompareModel {
 	/**
 	 * 通过比较文件名前8位得到最新版本
 	 */
-	public List<String> compare() {
+	public MsgModel compare() {
+		MsgModel msgModel=new MsgModel();
 		Map<Integer, String> map = null;
 		int[] arr = new int[1000];
 		try {
@@ -40,9 +39,8 @@ public class CompareModel {
 				File file = new File(path);
 				File[] files = file.listFiles();
 				for (int i = 0; i < files.length; i++) {
-					String[] paths = files[i].getPath().split("\\\\");
+					String[] paths = files[i].getPath().split(File.separator+File.separator);
 					int data = Integer.parseInt(paths[paths.length - 1].substring(0, 8));//比较
-//					if()
 					map = new HashMap<Integer, String>();
 					map.put(data, files[i].getPath());
 					arr[i] = data;
@@ -53,8 +51,13 @@ public class CompareModel {
 			}
 		} catch (Exception e) {
 			logger.error("版本文件命名不规范，无法找到最新版本");
-			return null;
+			msgModel.setId(102);
+			msgModel.setMsg("版本命名不规范无法找到最新版本");
+			return msgModel;
 		}
-		return m_copyPathList;
+		msgModel.setId(103);
+		msgModel.setMsg("获取最新版本路径");
+		msgModel.setList(m_copyPathList);
+		return msgModel;
 	}
 }

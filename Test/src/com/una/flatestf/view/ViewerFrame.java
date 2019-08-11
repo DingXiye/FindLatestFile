@@ -13,11 +13,13 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.una.flatestf.controller.Inte_Controller;
 import com.una.flatestf.impl.Inte_Controller_Impl;
+import com.una.flatestf.model.MsgModel;
 
 public class ViewerFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -42,12 +44,10 @@ public class ViewerFrame extends JFrame {
 		JPanel srcJp = new JPanel();
 		JPanel destJp = new JPanel();
 		JPanel buttonJp = new JPanel();
-		JPanel msgJp = new JPanel();
 
 		srcJp.setLayout(new FlowLayout());
 		destJp.setLayout(new FlowLayout());
 		buttonJp.setLayout(new FlowLayout());
-		msgJp.setLayout(new GridLayout());
 
 		JButton srcButton = new JButton("浏览");
 		srcButton.addActionListener(new ActionListener() {
@@ -97,7 +97,9 @@ public class ViewerFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Inte_Controller controller=new Inte_Controller_Impl(m_srcPath,m_destPath);
-				controller.Start();
+				MsgModel msgModel=controller.Start();
+				String msg=msgModel.getMsg();
+				JOptionPane.showMessageDialog(null, msg,"提示消息",JOptionPane.PLAIN_MESSAGE);
 			}
 		});
 		
@@ -106,7 +108,6 @@ public class ViewerFrame extends JFrame {
 		this.add(srcJp);
 		this.add(destJp);
 		this.add(buttonJp);
-		this.add(msgJp);
 		this.pack();
 		this.setVisible(true);
 	}

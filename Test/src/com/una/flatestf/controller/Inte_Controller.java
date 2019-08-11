@@ -1,5 +1,7 @@
 package com.una.flatestf.controller;
 
+import com.una.flatestf.model.MsgModel;
+
 public interface Inte_Controller {
-	void Start();
+	MsgModel Start();
 }
