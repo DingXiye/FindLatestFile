@@ -26,7 +26,7 @@ public class FilterModel {
 			msgModel.setMsg("配置文件未找到");
 			return msgModel;
 		} else {
-			m_filterStr = new GetFilter(xmlPath).getFilter();
+			m_filterStr = new GetFilter(xmlPath).getFilter();//
 			m_pathList = new ArrayList<String>();
 			File file = new File(srcPath);
 			File[] filelist = file.listFiles();
@@ -41,5 +41,4 @@ public class FilterModel {
 			return msgModel;
 		}
 	}
-	
 }

@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.una.flatestf.util.Close;
+
 /**
  * 错误提示信息使用一个实体类
  * 可以通过返回值返回错误信息
@@ -91,8 +92,10 @@ public class CopyModel {
 			}
 
 		} catch (FileNotFoundException e) {
+			logger.error("文件未找到");
 			e.printStackTrace();
 		} catch (IOException e) {
+			logger.error("文件拷贝错误");
 			e.printStackTrace();
 		}
 		Close.Closing(os, is);
