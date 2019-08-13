@@ -9,6 +9,7 @@ import com.una.flatestf.model.CompareModel;
 import com.una.flatestf.model.CopyModel;
 import com.una.flatestf.model.FilterModel;
 import com.una.flatestf.model.MsgModel;
+import com.una.flatestf.util.GetFilter;
 
 public class Inte_Controller_Impl implements Inte_Controller{
 	private static Logger logger = Logger.getLogger(Inte_Controller_Impl.class);
@@ -16,6 +17,8 @@ public class Inte_Controller_Impl implements Inte_Controller{
 	private String m_destPath=null;
 	private List<String> m_filterList=null;
 	private List<String> m_copyPathlist=null;
+	private String m_xmlPath = "配置文件/filter.xml";
+	
 	public Inte_Controller_Impl(String srcPath,String destPath) {
 		this.m_destPath=destPath;
 		this.m_srcPath=srcPath;
@@ -33,8 +36,16 @@ public class Inte_Controller_Impl implements Inte_Controller{
 			msgModel.setMsg("路径出错");
 			return msgModel;
 		}
+
 		FilterModel filterModel=new FilterModel();
-		msgModel=filterModel.Filter(m_srcPath);
+		if (m_xmlPath == null) {
+			logger.error("配置文件未找到");
+			msgModel.setId(101);
+			msgModel.setMsg("配置文件未找到");
+			return msgModel;
+		} 
+		List<String> filterList=new GetFilter(m_xmlPath).getFilter();
+		msgModel=filterModel.Filter(m_srcPath,filterList);
 		if(msgModel.getId()==101){
 			return msgModel;
 		}

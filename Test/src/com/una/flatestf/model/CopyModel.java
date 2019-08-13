@@ -23,7 +23,7 @@ public class CopyModel {
 	private List<String> m_copyPathList = null;
 	private String m_destPath = null;
 	private static Logger logger = Logger.getLogger(CopyModel.class);
-	
+	private String m_dirName;
 	public CopyModel(List<String> copyPathlist, String destPath) {
 		this.m_copyPathList = copyPathlist;
 		this.m_destPath = destPath;
@@ -35,13 +35,16 @@ public class CopyModel {
 	public MsgModel Copy() {
 		MsgModel msgModel=new MsgModel();
 		try {
-			for (String copypath : m_copyPathList) {
+			for (String path : m_copyPathList) {
 				LogModel logModel=new LogModel();
-				logModel.Log(copypath);
-				File src = new File(copypath);
-				File dest = new File(m_destPath);
+				logModel.Log(path);
+				String[] paths=path.split(File.separator+File.separator);
+				m_dirName=paths[paths.length-2];
+				File src = new File(path);
+				File dest = new File(m_destPath);//创建目标目录
 				if (src.isDirectory()) {
-					dest = new File(dest, src.getName());
+					dest = new File(dest, m_dirName);//创建项目目录
+					dest=new File(dest,src.getName());//创建版本目录
 				}
 				copy(src, dest);
 			}
